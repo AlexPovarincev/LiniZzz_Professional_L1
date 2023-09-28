@@ -1,0 +1,22 @@
+---
+ -  name: Install new kernel
+    hosts: all
+    become: yes
+    tasks:
+    - name: Install epel-release
+      yum:
+        name: epel-release
+        state: present
+        update_cache:  true
+    - name: Enable Repo
+      yum:
+        name: "https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm"
+        state: present
+        update_cache: true
+    - name: Install New Kernel
+      yum:
+        enablerepo: elrepo-kernel
+        update_cache: true
+        name: kernel-ml
+        state: present
+...
